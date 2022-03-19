@@ -52,7 +52,7 @@ contract ArtworkAuction{
     }
 
     function newBid(uint nbTickets) external {
-        require(auctionIsOpen);
+        require(auctionIsOpen); //if no current auction is opened, this opens a new auction round.
         require(ticketRegistry[msg.sender] >= nbTickets);
         auctionRegistry[msg.sender] += nbTickets;
         ticketRegistry[msg.sender] -= nbTickets;
