@@ -1,3 +1,7 @@
+/**
+ *Submitted for verification at Etherscan.io on 2022-03-20
+*/
+
 // SPDX-License-Identifier: GPL-3.0
 pragma solidity >=0.8.0;
 pragma abicoder v2;
@@ -20,7 +24,7 @@ contract ArtworkAuction{
     constructor() {
         author = msg.sender;
         owner = msg.sender;
-        url = '';
+        url = 'SoaresCespedesMunozLaadhar.com';
         auctionIsOpen = true;
         soldTickets = 0;
         n_bidders = 0;
@@ -52,13 +56,15 @@ contract ArtworkAuction{
     }
 
     function newBid(uint nbTickets) external {
-        require(auctionIsOpen); //if no current auction is opened, this opens a new auction round.
         require(ticketRegistry[msg.sender] >= nbTickets);
         auctionRegistry[msg.sender] += nbTickets;
         ticketRegistry[msg.sender] -= nbTickets;
 
-        if (!is_bidder(msg.sender))
-            bidders[n_bidders++] = msg.sender;
+        if (!is_bidder(msg.sender)){
+            bidders.push(msg.sender);
+            n_bidders++;
+        }
+        auctionIsOpen = true;
     }
 
     function is_bidder(address ad) private view returns(bool){
